@@ -124,7 +124,8 @@ def editar_usuario(id):
         cursor.execute('SELECT * FROM personasp WHERE id_persona = %s', (id,))
         data = cursor.fetchall()
 
-        return render_template('Editar.html', personafsp=data[0])
+    return render_template('Editar.html', personafsp=data[0])
+    
     
 
 
@@ -134,7 +135,7 @@ def editar_usuario(id):
 @app.route('/Registrar_canción', methods=['POST','GET']) #enviar info por medio de la url
 def Registrar_song():
 
-    if request.method == "POST":
+    if request.method == 'POST':
         Titulo =request.form.get('titulo')
         Artista= request.form.get('artista')
         Genero = request.form.get('genero')
@@ -148,16 +149,16 @@ def Registrar_song():
         
     #insertar datos en la tablas
         cursor.execute("INSERT INTO canciones (Titulo_song, Nombre_artist, Genero_song, Precio, Fecha_lanza, Img) VALUES(%s, %s, %s, %s, %s, %s)",(Titulo, Artista, Genero, Precio, Fecha, portadacover))
-    db.commit()
+        db.commit()
         # flash("Canción agregada con exito","success") #generar mensages
         
         
     #redirige a la misma pagina si el metodo es post
     
-    return redirect(url_for('Lista_songs')) #se llama la función 
+    return render_template('Registrar_cancion.html')#se llama la función 
     
     #si el motodo es get me renderiza al formulario
-                    #canciónnnn
+        #canciónnnn
 
 @app.route('/canciones')
 def Lista_songs():
@@ -173,8 +174,8 @@ def Lista_songs():
                     "titulo": cancion[1],  
                     "artista": cancion[2],
                     "genero": cancion[3],
-                    "precio" : cancion[6],
                     "Fecha" : cancion[4],
+                    "precio" : cancion[6],
                     "img": imagen
                 })
     return render_template('Lista_canciones.html', canciones=listacanciones)
@@ -195,11 +196,10 @@ def editar_song(id):
         Fecha = request.form.get('fecha')
         Portada = request.form.get('portada')
         Genero = request.form.get('genero')
-        Rol = request.form.get('rool')
 
     #sentencia para actualizar los datos
         sql = "UPDATE Canciones set Titulo_song=%s,Nombre_artist=%s,,Precio=%s,Fecha_lanza=%s,img=%s,Genero_song=%s where id_cancion=%s"
-        cursor.execute(sql,(Titulo,Artista,Duración,Portada,Fecha,Genero,Rol,id ))
+        cursor.execute(sql,(Titulo,Artista,Duración,Portada,Fecha,Genero,id ))
         db.commit()
 
         return redirect(url_for('canciones'))

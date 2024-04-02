@@ -17,32 +17,32 @@
         <td> Codigo </td>
         <td> Titulo </td>
         <td> Artista </td>
-        <td> Duración </td>
+        <td> Genero </td>   
+        <td> Porecio </td> <!--anecdota con Daniel 🙃-->
         <td> Fecha de lanzamiento </td>
         <td> Portada </td>
-        <td> Genero </td>
     </tr>
     <tbody>
     <!--Las llaves se usan para poder usar python en html-->
 
-    {% for A in canciones %}
+    {% for canciones in canciones %}
     
-    <tr>
-        <td>{{ A.hamet   }}</td>
-        <td>{{ A.titulo  }}</td>
-        <td>{{ A.artista }}</td>
-        <td>{{ A.genero  }}</td>
-        <td>{{ A.precio  }}</td>
-        <td>{{ A.Fecha   }}</td>
-        <td><img src="data:image/jpeg;base64,{{A.imagen}}" alt="no sale imagen" whidt="100%"></td>
+        <tr>
+            <td>{{ canciones.hamet   }}</td>
+            <td>{{ canciones.titulo  }}</td>
+            <td>{{ canciones.artista }}</td>
+            <td>{{ canciones.genero  }}</td>
+            <td>{{ canciones.precio  }}</td>
+            <td>{{ canciones.Fecha   }}</td>
+            <td><img src="data:image/jpeg;base64,{{canciones.imagen}}" alt="no sale imagen" width="100"></td>
+        </tr>
+        
     </tr>
+
     {% endfor %}
-    <!--En la base de datos contraseña-->
-            
-    </tbody>
 </table>
-        <button><a href="{{url_for('Lista_songs')}}">Actualizar</a></button>
-        <button><a href="/Logout" id="exit">Exit for live</a></button>
+
+</tbody>
+<button><a href="/Logout" id="exit">Exit for live</a></button>
 </body>
 </html>
-
