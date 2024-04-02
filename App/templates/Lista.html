@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/Lista_canciones.css')}}">
+
+    <title>Lista</title>
+</head>
+<body>
+    <main >
+        <h1 id="titulo">Bienvendo {{session ['usuario'] }}</h1>
+        <h3>Lista Personas</h3>
+    </main>
+<table>
+    <tr class="soy">
+        <td> Codigo</td>
+        <td> Nombre </td>
+        <td> Apellido </td>
+        <td> Nombre de usuario </td>
+        <td> Correo </td>
+        <td> Celular </td>
+        <td> Dirección </td>
+        <td> contraseña</td>
+    </tr>
+    <tbody>
+    <!--Las llaves se usan para poder usar python en html-->
+
+    {% for usuarios in Canciones %}
+            <tr>
+                <td>{{ usuarios [0] }}</td>
+                <td>{{ usuarios [1] }}</td>
+                <td>{{ usuarios [2] }}</td>
+                <td>{{ usuarios [3] }}</td>
+                <td>{{ usuarios [4] }}</td>
+                <td>{{ usuarios [5] }}</td>
+                <td>{{ usuarios [6] }}</td>
+                <td>{{ usuarios [7] }}</td> <!--En la base de datos contraseña-->
+                <td>
+                    <button><a href="{{url_for('editar_usuario',id=usuarios[0])}}">Editar</a></button>
+                    <button><a href="{{url_for('eliminar_usuario' ,id=usuarios[0])}}">Eliminar</a></button>
+                </td>
+            </tr>
+            
+    {% endfor %}
+</table>
+
+</tbody>
+        <button><a href="{{url_for('Lista')}}">Actialuzar</a></button>
+        <button><a href="/Logout" id="exit">Exit for live</a></button>
+</body>
+</html>

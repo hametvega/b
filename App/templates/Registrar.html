@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/registro.css')}}">
+    <title>Registro Persona</title>
+    <h1 class="titulo"> Inicio de sesión</h1>
+</head>
+<body>
+    <form action="/Registrar" method="post">
+        <div class="contenedor">
+            <label>Nombre: </label>
+            <input type="text" required name="name" placeholder="Ingresar el Nombre"><br><br>
+            <br> <label>Apellido: </label> <!-- el place holder es para texto en el fondo -->
+            <input type="text" required name="apellido" placeholder="Ingresar el Apellido"><br><br>
+            <br> <label>Nombre de usuario: </label>
+            <input type="text" required name="usuario" placeholder="nombre de usuario"><br><br>
+            <br> <label>Correo: </label>
+            <input type="text" required name="correo" placeholder="Ingresar su dirección de correo"><br><br>
+            <br> <label>Celular: </label>
+            <input type="number" required name="celular" placeholder="Ingresar su numero de contacto"><br><br>
+            <br> <label>Dirección: </label>
+            <input type="text" required name="direccion" placeholder="Ingresar la dirección"><br><br>
+            <br> <label>Contraseña: </label>
+            <input type="password" name="contrasena" placeholder="Ingresar la Contraseña"><br><br>
+            <br> <button type="submit">Registrar</button>
+        </div>
+    </form>
+    
+</body>
+</html>

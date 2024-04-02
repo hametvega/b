@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/Lista_canciones.css')}}">
+
+    <title>Lista Canciones</title>
+</head>
+<body>
+    <main >
+        <h1 id="titulo">Bienvendo {{session ['usuario'] }}</h1>
+        <h3>Lista de Canciones</h3>
+    </main>
+<table>
+    <tr class="soy">
+        <td> Codigo </td>
+        <td> Titulo </td>
+        <td> Artista </td>
+        <td> Duración </td>
+        <td> Fecha de lanzamiento </td>
+        <td> Portada </td>
+        <td> Genero </td>
+    </tr>
+    <tbody>
+    <!--Las llaves se usan para poder usar python en html-->
+
+    {% for A in canciones %}
+    
+    <tr>
+        <td>{{ A.hamet   }}</td>
+        <td>{{ A.titulo  }}</td>
+        <td>{{ A.artista }}</td>
+        <td>{{ A.genero  }}</td>
+        <td>{{ A.precio  }}</td>
+        <td>{{ A.Fecha   }}</td>
+        <td><img src="data:image/jpeg;base64,{{A.imagen}}" alt="no sale imagen" whidt="100%"></td>
+    </tr>
+    {% endfor %}
+    <!--En la base de datos contraseña-->
+            
+    </tbody>
+</table>
+        <button><a href="{{url_for('Lista_songs')}}">Actualizar</a></button>
+        <button><a href="/Logout" id="exit">Exit for live</a></button>
+</body>
+</html>
+

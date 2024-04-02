@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
+    <title>Inicio de sesión</title>
+</head>
+<body>
+    <form action="/Login" method="post">
+    <h1> Inicio de sesión</h1>
+    
+        <main>
+                <br><label>Nombre de usuario: </label>
+                <br><input type="text" required name="name_usuario" placeholder="Ingresar el Nombre"><br><br>
+                <br> <label>Constraseña: </label>
+                <br><input type="password" name="contrasena_log" placeholder="Contraseña"><br><br>
+                <br> <button type="submit">Enviar</button>
+                
+        <main>
+
+
+
+
+
+    </form>
+</body>
+</html>

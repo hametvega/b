@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/registro.css')}}">
+    <title>Registrar Canciones</title>
+    <h1 class="titulo"> Inicio de sesión</h1>
+</head>
+<body>
+    <form action="/Registrar_canción" method="post" enctype="multipart/form-data">
+        <div class="contenedor">
+            <label> titulo: </label>
+            <input type="text" required name="titulo" placeholder="Ingresar el Nombre"><br><br>
+            <br> <label>Artista: </label> <!-- el place holder es para texto en el fondo -->
+            <input type="text" required name="artista" placeholder="Ingresar el Apellido"><br><br>
+            <br> <label>Genero: </label>
+            <input type="text" required name="genero" placeholder="nombre de usuario"><br><br>
+            <br> <label>Precio: </label>
+            <input type="number" required name="precio" placeholder="Ingresar su dirección de correo"><br><br>
+            <br> <label>Fecha de lanzamiento: </label>
+            <input type="date" required name="fecha" placeholder="Ingresar su numero de contacto"><br><br>
+            <br> <label>Portada: </label>
+            <input type="file" required name="portada"><br><br>
+            <br> <button type="submit">Registrar</button>
+        </div>
+    </form>
+    
+</body>
+</html>

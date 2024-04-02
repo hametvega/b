@@ -1,0 +1,18 @@
+body{
+
+    background-color: aqua;
+}
+h1{
+    color: brown;
+    text-align: center;
+}
+form{
+    border: 15px;
+    border-color: aquamarine;
+}
+.contenedor{
+    padding: 5px;
+    border-radius: 20px;
+    border-color: aquamarine;
+    background-color: beige;
+}
