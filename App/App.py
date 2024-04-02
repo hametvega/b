@@ -3,11 +3,11 @@
 from flask import Flask,render_template,request,redirect,url_for,flash,session
 #para importar las cosas de una libreria
 import mysql.connector #importamos el SQL
+import base64
 from werkzeug.security import generate_password_hash, check_password_hash
 # import bcrypt
 app=Flask(__name__)
 app.secret_key='12346'
-import base64
 #configurar conexción
 db = mysql.connector.connect(
     host="localhost", #valor por default
@@ -168,15 +168,16 @@ def Lista_songs():
     if canciones:
         listacanciones = []
         for cancion in canciones:
-                imagen = base64.b64encode(cancion[5]).decode('utf-8')
-                listacanciones.append({
-                    "hamet" : cancion[0],
-                    "titulo": cancion[1],  
-                    "artista": cancion[2],
-                    "genero": cancion[3],
-                    "Fecha" : cancion[4],
-                    "precio" : cancion[6],
-                    "img": imagen
+            
+            imagen = base64.b64encode(cancion[5]).decode('utf-8')
+            listacanciones.append({
+                "hamet" : cancion[0],
+                "titulo": cancion[1],  
+                "artista": cancion[2],
+                "genero": cancion[3],
+                "Fecha" : cancion[4],
+                "precio" : cancion[6],
+                "img": imagen
                 })
     return render_template('Lista_canciones.html', canciones=listacanciones)
     # return redirect(url_for('Lista_songs', Canciones = users))
