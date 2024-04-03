@@ -88,7 +88,7 @@ def Registrar_usuario():
         contraseña= request.form.get('contrasena')
         contraencriptada = generate_password_hash(contraseña)
     #insertar datos en la tabla
-        cursor.execute("INSERT INTO personasp (Nombre_persona, Apellido_persona, Nombre_usuario, correo, celular, dirección, contraseña) VALUES(%s, %s, %s, %s, %s, %s, %s)",(Nombres, Apellidos, usuario, correo, Celular, dirección, contraencriptada))
+        cursor.execute("INSERT INTO personasp (Nombre_persona, Apellido_persona, Nombre_usuario, correo, celular, dirección, contraseña) VALUES(%s, %s, %s, %s, %s, %s, %s)",(Nombres, Apellidos, usuario, correo, Celular, dirección, contraseña))
         db.commit()
         flash("Usuario creado correctamente","success") #generar mensages
         
@@ -123,8 +123,7 @@ def editar_usuario(id):
         cursor = db.cursor()
         cursor.execute('SELECT * FROM personasp WHERE id_persona = %s', (id,))
         data = cursor.fetchall()
-
-    return render_template('Editar.html', personafsp=data[0])
+    return render_template('Editar.html', personasp=data[0])
     
     
 

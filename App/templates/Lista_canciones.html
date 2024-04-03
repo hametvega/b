@@ -25,18 +25,21 @@
     <tbody>
     <!--Las llaves se usan para poder usar python en html-->
 
-    {% for canciones in canciones %}
+    {% for canciones_def in canciones %}
     
         <tr>
-            <td>{{ canciones.hamet   }}</td>
-            <td>{{ canciones.titulo  }}</td>
-            <td>{{ canciones.artista }}</td>
-            <td>{{ canciones.genero  }}</td>
-            <td>{{ canciones.precio  }}</td>
-            <td>{{ canciones.Fecha   }}</td>
+            <td>{{ canciones_def.hamet   }}</td>
+            <td>{{ canciones_def.titulo  }}</td>
+            <td>{{ canciones_def.artista }}</td>
+            <td>{{ canciones_def.genero  }}</td>
+            <td>{{ canciones_def.precio  }}</td>
+            <td>{{ canciones_def.Fecha   }}</td>
             <td><img src="data:image/jpeg;base64,{{canciones.img}}" alt="no sale imagen" width="100"></td>
+            <td>
+                <button><a href="{{url_for('editar_usuario',   id=canciones_def.hamet )}}">Editar</a></button>
+                <button><a href="{{url_for('eliminar_usuario', id=canciones_def.hamet )}}">Eliminar</a></button>
+            </td>
         </tr>
-        
     </tr>
 
     {% endfor %}
