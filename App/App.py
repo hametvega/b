@@ -29,28 +29,71 @@ def Encriptar(contraencrip):
     return "Encriptado:{0}| coincide:{1}".format(encriptar,valor)
 
                         #login
-
 @app.route('/Login', methods =['GET','POST'])
 def login():
+    #verificar las credenciales
     if request.method=='POST':
-            #verificar las credenciales
         Username_login= request.form.get('name_usuario')
         passworld_login= request.form.get('contrasena_log')
-        
-        cursor = db.cursor  
-        cursor.execute("SELECT Nombre_usuario, contraseña FROM personasp wher Nombre_usuario = %s", (Username_login,))
+
+        cursor = db.cursor()  # Llamar al método cursor() para crear una nueva instancia
+        Query="SELECT Nombre_usuario, contraseña FROM personasp WHERE Nombre_usuario = %s"  # Agregar un espacio antes de WHERE
+        cursor.execute(Query, (Username_login,))
         Username = cursor.fetchone()
-        #usuarios= cursor.fetchone()# el fetch one es para una sola vlaidación
-        
-        if Username and check_password_hash(Username_login[1],passworld_login):
-            session['usuario'] = Username_login;
-            return redirect(url_for('Lista'))
+
+        print(Username)
+        if Username is not None:
+            Password_Uncripted = check_password_hash(Username[1], passworld_login) 
+            print(Password_Uncripted)
+
+            if Password_Uncripted:
+                session['User'] = Username_login
+                session['Type_User'] = Username[2]
+                if Username[2] == 'Administrador':
+                    return redirect(url_for('Lista'))
+                else:
+                    return redirect(url_for('Lista_songs'))
+            else:
+                print("La contraseña ingresada es incorrecta. ")
+                Error = 'Credenciales invalidas. intentaro nuevamente'
+                return render_template('Login.html')
         else:
-            print('Credenciales invalidas. por favor intentarlo de nuevo')
+            print("El usuario no existe. ")
+            Error = 'Credenciales invalidas. intentaro nuevamente'
             return render_template('Login.html')
-    return render_template('Login.html')
 
+    return render_template('Login.html', Error = Error)
+# @app.route('/Login', methods =['GET','POST'])
+# def login():
+#             #verificar las credenciales
+#     if request.method=='POST':
+#         Username_login= request.form.get('name_usuario')
+#         passworld_login= request.form.get('contrasena_log')
 
+#         cursor = db.cursor  
+#         Query="SELECT Nombre_usuario, contraseña FROM personasp wher Nombre_usuario = %s"
+#         cursor.execute(Query, (Username_login))
+#         Username = cursor.fetchone()
+#         #usuarios= cursor.fetchone()# el fetch one es para una sola vlaidación
+        
+#         print(Username)
+#         Password_Uncripted = check_password_hash(Username[1], passworld_login) 
+#         print(Password_Uncripted)
+        
+#         if Username is not None and check_password_hash(Username[1], passworld_login):
+            
+#             session['User'] = Username_login
+#             session['Type_User'] = Username[2]
+#             if Username[2] == 'Administrador':
+#                 return redirect(url_for('Lista'))
+#             else:
+#                 return redirect(url_for('Lista_songs'))
+#         else:
+#             print("Las canciones ingresadas son invalidas. ")
+#             Error = 'Credenciales invalidas. intentaro nuevamente'
+#             return render_template('Login.html')
+
+#     return render_template('Login.html', Error = Error)
                         #lista
 
 
@@ -198,25 +241,25 @@ def editar_song(id):
         Genero = request.form.get('genero')
 
     #sentencia para actualizar los datos
-        sql = "UPDATE Canciones set Titulo_song=%s,Nombre_artist=%s,,Precio=%s,Fecha_lanza=%s,img=%s,Genero_song=%s where id_cancion=%s"
+        sql = "UPDATE Canciones set Titulo_song=%s,Nombre_artist=%s,Precio=%s,Fecha_lanza=%s,img=%s,Genero_song=%s where id_cancion=%s"
         cursor.execute(sql,(Titulo,Artista,Duración,Portada,Fecha,Genero,id ))
         db.commit()
 
-        return redirect(url_for('canciones'))
+        return redirect(url_for('Lista_songs'))
     else:
         #obtener los datos de la persona que va a editar
         cursor = db.cursor()
         cursor.execute('SELECT * FROM canciones WHERE id_cancion = %s', (id,))
         data = cursor.fetchall()
 
-        return render_template('Editar_canción.html', canciones=data[0])
+        return render_template('Editar_canción.html', Canciones=data[0])
     
-@app.route('/eliminar_usuario/<int:id>', methods=['GET'])
+@app.route('/eliminar_cancion/<int:id>', methods=['GET'])
 def eliminar_song(id):
     if request.method == 'POST' or request.method == 'GET':
-        cursor.execute('delete FROM canciones WHERE id_cancion = %s', (id,))
+        cursor.execute('delete FROM Canciones WHERE id_cancion = %s', (id,))
         db.commit()
-        return redirect(url_for('canciones'))
+        return redirect(url_for('Lista_songs'))
 
         
 @app.route('/eliminar/<int:id>', methods=['GET'])
@@ -230,35 +273,7 @@ def eliminar_usuario(id):
     
 #Canciones 
 #Verificar credenciales
-            # @app.route ('/algo', methods =['GET', 'POST'])
-            #     def algo():
-            #         if request.method=='POST':
-            #             #verificar las credenciales
-            #         Username_login= request.form.get('name_usuario')
-            #         passworld_login= request.form.get('contrasena_log')
-                    
-            #         cursor = db.cursor  
-            #         cursor.execute("SELECT Nombre_usuario, contraseña FROM personasp wher Nombre_usuario = %s", (Username_login,))
-            #         Username = cursor.fetchone()
-            #         #usuarios= cursor.fetchone()# el fetch one es para una sola vlaidación
-                    
-            #         if Username and check_password_hash(Username_login[1],passworld_login):
-            #             session['usuario'] = usuarios['usuarioper'];
-            #             session['rol'] = usuarios  ['roles'] 
-                        
-                        
-            #             #depende del rol se asigna una url
-            #             if usuaruois['roles']=='administrador':
-            #                 return redirect(url_for('aqui va la vista del administrador'))
-            #             else:
-            #                 return redirect(url_for('aqui va la vista del usuario'))
-                        
-            #             return redirect(url_for('Lista'))
-            #         else:
-            #             print('Credenciales invalidas. por favor intentarlo de nuevo')
-            #             return render_template('Login.html')
-            #     return render_template('Login.html')
-
+        
     
     
     

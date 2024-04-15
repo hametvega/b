@@ -34,10 +34,10 @@
             <td>{{ canciones_def.genero  }}</td>
             <td>{{ canciones_def.precio  }}</td>
             <td>{{ canciones_def.Fecha   }}</td>
-            <td><img src="data:image/jpeg;base64,{{canciones.img}}" alt="no sale imagen" width="100"></td>
+            <td><img src="data:image/jpeg;base64,{canciones.img}" alt="no sale imagen" width="100"></td>
             <td>
-                <button><a href="{{url_for('editar_usuario',   id=canciones_def.hamet )}}">Editar</a></button>
-                <button><a href="{{url_for('eliminar_usuario', id=canciones_def.hamet )}}">Eliminar</a></button>
+                <button><a href="{{url_for('editar_song',   id=canciones_def.hamet )}}">Editar</a></button>
+                <button><a href="{{url_for('eliminar_song', id=canciones_def.hamet )}}">Eliminar</a></button>
             </td>
         </tr>
     </tr>
